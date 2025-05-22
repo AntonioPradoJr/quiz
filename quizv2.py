@@ -18,12 +18,27 @@ list_questions = [
 ]
 
 def show_questions(questions):
-    
+    score = 0
     for dictionary_questions in questions:
         print(f'Pergunta: {dictionary_questions['Question']}')
         print()
-        for options_index, options_values in enumerate(dictionary_questions):
+
+        for options_index, options_values in enumerate(dictionary_questions['Option']):
             print(f'{options_index}) {options_values}')
         print()
 
-print(show_questions(list_questions))
+        try:
+            user_answer = int(input('Chose one option: '))
+
+        except (ValueError, IndexError):
+            return 'Invalid Option. Try Again.'
+
+        if dictionary_questions['Answer'] == dictionary_questions['Option'][user_answer]:
+            print('Voce acertou')
+            score +=1
+            print()
+    print(score)
+
+       
+
+show_questions(list_questions)
