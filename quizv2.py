@@ -26,18 +26,25 @@ def show_questions(questions):
         for options_index, options_values in enumerate(dictionary_questions['Option']):
             print(f'{options_index}) {options_values}')
         print()
+        while True:
+            try:
+                user_answer = int(input('Chose one option: '))
+                
+                if user_answer < 0 or user_answer >= len(dictionary_questions['Option']):
+                    print('Invalid Option. Try Again.')
+                    continue
+                
+                break
 
-        try:
-            user_answer = int(input('Chose one option: '))
-
-        except (ValueError, IndexError):
-            return 'Invalid Option. Try Again.'
+            except (ValueError, IndexError, TypeError):
+                print('Invalid Option. Try Again.')
 
         if dictionary_questions['Answer'] == dictionary_questions['Option'][user_answer]:
             print('Voce acertou')
             score +=1
             print()
-    print(score)
+
+    print(f'Parabéns você acertou {score}x')
 
        
 
